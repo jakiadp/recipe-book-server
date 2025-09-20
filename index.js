@@ -30,15 +30,23 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    const recipeCollection = client.db('recipeDB').collection('recipes')
+const recipesCollection = client.db('recipeDB').collection('recipes');
+app.get('/recipes',async(req, res) =>{
+  const result = await recipesCollection.find().toArray();
+  res.send(result);
+})
 
-    app.post('/recipes', async(res,req) =>{
-        const newRecipe = req.body;
-        console.log(newRecipe);
-        const result = await recipeCollection.insertOne(newRecipe);
-        res.send(result); 
 
+    app.post('/recipes', async(req, res)=>{
+      const  newRecipe = req.body;
+      console.log(newRecipe);
+      const result = await recipesCollection.insertOne(newRecipe);
+      res.send(result)
     })
+
+  
+
+    
 
 
     
