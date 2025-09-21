@@ -53,6 +53,18 @@ app.get('/recipes/:id', async(req, res)=> {
       res.send(result)
     })
 
+
+    app.put('/recipes/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) }
+      const options = { upsert: true };
+      const updateRecipe = req.body;
+      const updateDoc = {
+      $set: updateRecipe
+};
+
+    } )
+
 app.delete('/recipes/:id', async(req, res)=> {
   const id = req.params.id;
   const query = {_id: new ObjectId(id)};
