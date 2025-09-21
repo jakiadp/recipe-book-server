@@ -37,6 +37,14 @@ app.get('/recipes',async(req, res) =>{
   res.send(result);
 })
 
+app.get('/recipes/:id', async(req, res)=> {
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)};
+  const result = await recipesCollection.findOne(query);
+  res.send(result);
+
+})
+
  
     app.post('/recipes', async(req, res)=>{
       const  newRecipe = req.body;
