@@ -31,6 +31,7 @@ async function run() {
     await client.connect();
 
 const recipesCollection = client.db('recipeDB').collection('recipes');
+const userCollection =client.db('recipeDB').collection('users')
 
 app.get('/recipes',async(req, res) =>{
   const result = await recipesCollection.find().toArray();
@@ -76,6 +77,17 @@ app.delete('/recipes/:id', async(req, res)=> {
   res.send(result);
 
 })
+
+
+// user infrom realeted Apis
+
+app.post('/users', async(req, res) =>{
+  const userprofile = req.body;
+  const result = await userCollection.insertOne(userprofile);
+  res.send(result);
+})
+
+
   
 
     
