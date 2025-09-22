@@ -61,7 +61,11 @@ app.get('/recipes/:id', async(req, res)=> {
       const updateRecipe = req.body;
       const updateDoc = {
       $set: updateRecipe
-};
+        } 
+
+        const result =await recipesCollection.updateOne(filter,updateDoc, options);
+        res.send(result);
+
 
     } )
 
